@@ -1,4 +1,4 @@
-FROM mygento/puppet
+FROM percona:5.6
 
 MAINTAINER Nikita Tarasov <nikita@mygento.ru>
 
