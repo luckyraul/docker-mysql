@@ -1,12 +1,11 @@
-FROM percona:5.6
+FROM mygento/puppet
 
-MAINTAINER Nikita Tarasov <nikita@mygento.ru>
+MAINTAINER nikita@mygento.ru
 
-# Let the conatiner know that there is no tty
-ENV DEBIAN_FRONTEND noninteractive
+COPY entrypoint.sh /
+ENTRYPOINT ["/entrypoint.sh"]
 
-RUN apt-get -qq update && apt-get upgrade -qqy
+EXPOSE 3306
+VOLUME ["/var/lib/mysql", "/var/log/mysql"]
 
-RUN apt-get install -qqy rubygems git
-
-RUN gem install --no-rdoc --no-ri activesupport -v 4.2.5 && gem install librarian-puppet --no-rdoc --no-ri
+CMD ["mysqld"]
